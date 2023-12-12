@@ -1,0 +1,21 @@
+const mongoose = require("mongoose")
+const PostSchema = new mongoose.Schema({
+    userid:{
+        type:String,
+        required:true,
+    },
+    description:{
+        type:String,
+        required:true,
+        min:10,max:100,
+    },
+    imageUrl:{
+        type:String,
+        required:true,
+    },
+    likes:{
+        type:[String],
+        default:[],
+    }
+},{timestamps:true})
+module.exports = mongoose.model("Post",PostSchema)
