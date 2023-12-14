@@ -3,8 +3,10 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv")
 const cors = require("cors")
 const app = express()
+const PORT=8000
+// mongoose.connect("mongodb://127.0.0.1:27017/socialhub")
+mongoose.connect("mongodb://127.0.0.1:27017/socialhub", { useNewUrlParser: true, useUnifiedTopology: true })
 
-mongoose.connect("mongodb://127.0.0.1:27017/socialhub")
 .then(()=>{
     console.log("mongodb connected")
 })

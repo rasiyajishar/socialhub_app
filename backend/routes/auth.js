@@ -1,4 +1,4 @@
-const {register,login} = require("../controllers/authcontroller")
+const {register,login} = require("../controllers/authController")
 const authRouter = require("express").Router()
 authRouter.post('/register',register)
 authRouter.post('/login',login)
