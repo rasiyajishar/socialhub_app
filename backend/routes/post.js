@@ -9,7 +9,7 @@ postRouter.get('/find/userposts/:id',getuserPosts)
 postRouter.get('/timelinePosts',getTimelineposts)
 
 postRouter.post('/',verifyToken,createPost)
-postRouter.put('updatePOst/:id',verifyToken,updatePost)
+postRouter.put('updatePost/:id',verifyToken,updatePost)
 postRouter.put('/likePost/:postid',verifyToken,likePost)
 postRouter.put('dislikePost/:postid',verifyToken,dislikePost)
 postRouter.delete('/deletePost/:id',verifyToken,deletePost)
