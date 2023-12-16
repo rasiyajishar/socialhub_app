@@ -21,7 +21,13 @@ app.use(cors())
 
 //authroutes
 const authRouter = require("./routes/auth")
+const commentRouter = require("./routes/comment")
+const postRouter = require("./routes/post")
+const userRouter = require("./routes/user")
 app.use("/auth",authRouter)
+app.use("/post",postRouter)
+app.use("/comment",commentRouter)
+app.use("/user",userRouter)
 
 app.listen(process.env.PORT,()=>console.log('server has been started')
 

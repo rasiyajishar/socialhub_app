@@ -90,9 +90,30 @@ const likePost= async(req,res)=>{
     }
 }
 
-
+const dislikePost = async(req,res)=>{
+    try {
+        const  post = await Post.findById(req.params.postId)
+        if(!post){
+         throw new Error("no such a post")
+        }
+        const likedpostbyuser= post.likes.includes(req.user.id)
+        if(likedpostbyuser){
+       
+         await Post.findByIdAndUpdate(
+             req.params.postId,
+             {$pull:{likes:req.user.id}},
+             {new:true}
+         )
+         return res.status(200).json({msg:"post has been successfully unliked"})
+        }  else{
+            throw new Error ("can not unlike a post ")
+        } 
+    } catch (error) {
+     return res.status(500).json(error.message)   
+    }
+}
 module.exports = {
     getPost,
     getuserPosts,
-    createPost,deletePost,updatePost,likePost
+    createPost,deletePost,updatePost,likePost,dislikePost
 }
