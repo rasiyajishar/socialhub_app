@@ -3,6 +3,14 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv").config()
 const cors = require("cors")
 const app = express()
+
+app.use(cors())
+
+
+
+
+app.use(express.json());
+
 // mongoose.connect("mongodb://127.0.0.1:27017/socialhub")
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -13,20 +21,29 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     console.error("failed to connect mongodb",error.message)
 })
  
+
+
+
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors())
+
 
 
 //authroutes
-const authRouter = require("./routes/auth")
+const authRouter = require("./routes/auth");
+app.use("/auth", authRouter);
+
 const commentRouter = require("./routes/comment")
 const postRouter = require("./routes/post")
 const userRouter = require("./routes/user")
-app.use("/auth",authRouter)
+
 app.use("/comment",commentRouter)
 app.use("/post",postRouter)
 app.use("/user",userRouter)
-app.listen(process.env.PORT,()=>console.log('server has been started')
 
-)
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
