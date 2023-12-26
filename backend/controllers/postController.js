@@ -31,7 +31,8 @@ const createPost = async(req,res)=>{
     const post = await Post.create({ ...req.body, userId: req.user.id });
     return res.status(201).json(post)
 } catch (error) {
-    return res.status(500).json(error.message);
+    console.error(error);
+    return res.status(500).json({ message: "Failed to create the post" });
 }
 };
 

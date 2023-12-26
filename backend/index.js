@@ -34,7 +34,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
+app.use("/images",express.static("public/images"))
 
 
 //authroutes
@@ -44,11 +44,12 @@ app.use("/auth", authRouter);
 const commentRouter = require("./routes/comment")
 const postRouter = require("./routes/post")
 const userRouter = require("./routes/user")
+const uploadRouter = require("./controllers/uploadRouter")
 
 app.use("/comment",commentRouter)
 app.use("/post",postRouter)
 app.use("/user",userRouter)
-
+app.use("/upload",uploadRouter)
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
