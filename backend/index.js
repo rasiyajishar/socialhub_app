@@ -4,10 +4,17 @@ const dotenv = require("dotenv").config()
 const cors = require("cors")
 const app = express()
 
-app.use(cors())
+require('dotenv').config();
 
+// app.use(cors())
 
-
+const corsOptions = {
+  origin: "*", // Allow all origins (for testing only)
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
