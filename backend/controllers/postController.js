@@ -58,7 +58,7 @@ const updatePost = async(req,res) =>{
     try {
        const post = await Post.findById(req.params.id) 
        if(post.userId == req.user.id){
-        const updatedPost = Post.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
+        const updatedPost =await Post.findByIdAndUpdate(req.params.id,{$set:req.body},{new:true})
         return res.status(200).json(updatedPost)
        }else{
         throw new Error ("you can not update,you can update your own post ")
@@ -115,6 +115,7 @@ const dislikePost= async(req,res)=>{
 }
 
 const getTimelinePosts = async (req, res) => {
+    console.log("first")
     try {
         const currentUser = await User.findById(req.user.id);
         const userPosts = await Post.find({ userId: currentUser._id });
@@ -125,11 +126,10 @@ const getTimelinePosts = async (req, res) => {
         );
         return res.json(userPosts.concat(...friendPosts).sort((a, b) => b.createdAt - a.createdAt))
     } catch (err) {
-        res.status(500).json(err);
-    }
+        res.status(403).json({ error: 'Forbidden' });
 }
 
-
+}
 module.exports = {
     getPost,
     getuserPosts,
