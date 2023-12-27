@@ -1,11 +1,11 @@
 const { getPost,getuserPosts,createPost,
     updatePost,deletePost,likePost,
-    dislikePost} = require("../controllers/postController")
+    dislikePost,getTimelinePosts,} = require("../controllers/postController")
     const verifyToken = require('../middlewares/auth')
 const postRouter = require('express').Router()
 postRouter.get('/find/:id',getPost)
 postRouter.get('/find/userposts/:id',getuserPosts)
-// postRouter.get('/timelinePosts',getTimelineposts)
+ postRouter.get('/timelinePosts',getTimelinePosts)
 
 postRouter.post('/',verifyToken,createPost)
 postRouter.put('updatePost/:id',verifyToken,updatePost)

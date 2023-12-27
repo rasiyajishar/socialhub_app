@@ -50,6 +50,7 @@ const authSchema = require("./validation")
 
 // USER REGISTRATION
 const register = async (req, res) => {
+  console .log("hello")
     const { error, value } = authSchema.validate(req.body);
     const { username, email, password } = value;
     const findUser = await User.findOne({ email: email });

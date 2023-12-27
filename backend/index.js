@@ -43,11 +43,12 @@ app.use("/auth", authRouter);
 
 const commentRouter = require("./routes/comment")
 const postRouter = require("./routes/post")
+app.use("/post",postRouter)
 const userRouter = require("./routes/user")
 const uploadRouter = require("./controllers/uploadRouter")
 
 app.use("/comment",commentRouter)
-app.use("/post",postRouter)
+
 app.use("/user",userRouter)
 app.use("/upload",uploadRouter)
 

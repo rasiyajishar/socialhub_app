@@ -114,9 +114,24 @@ const dislikePost= async(req,res)=>{
     }
 }
 
+const getTimelinePosts = async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.user.id);
+        const userPosts = await Post.find({ userId: currentUser._id });
+        const friendPosts = await Promise.all(
+            currentUser.followings.map((friendId) => {
+                return Post.find({ userId: friendId })
+            })
+        );
+        return res.json(userPosts.concat(...friendPosts).sort((a, b) => b.createdAt - a.createdAt))
+    } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 
 module.exports = {
     getPost,
     getuserPosts,
-    createPost,deletePost,updatePost,likePost,dislikePost
+    createPost,deletePost,updatePost,likePost,dislikePost,getTimelinePosts
 }
