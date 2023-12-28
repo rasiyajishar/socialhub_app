@@ -4,10 +4,13 @@ const { getPost,getuserPosts,createPost,
     const verifyToken = require('../middlewares/auth')
 const postRouter = require('express').Router()
 postRouter.get('/find/:id',getPost)
-postRouter.get('/find/userposts/:id',getuserPosts)
-postRouter.get('/timelinePosts', verifyToken, getTimelinePosts);
+postRouter.get('/find/userposts/:id',getuserPosts);
+postRouter.post('/createPost',verifyToken,createPost)
+postRouter.get('/timelinePosts',verifyToken, getTimelinePosts);
 
-postRouter.post('/',verifyToken,createPost)
+
+
+
 postRouter.put('/updatePost/:id',verifyToken,updatePost)
 postRouter.put('/likePost/:postid',verifyToken,likePost)
 postRouter.put('/dislikePost/:postid',verifyToken,dislikePost)

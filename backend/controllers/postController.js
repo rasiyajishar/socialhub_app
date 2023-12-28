@@ -29,6 +29,7 @@ const createPost = async(req,res)=>{
     }
 
     const post = await Post.create({ ...req.body, userId: req.user.id });
+    console.log(post)
     return res.status(201).json(post)
 } catch (error) {
     console.error(error);
@@ -115,7 +116,7 @@ const dislikePost= async(req,res)=>{
 }
 
 const getTimelinePosts = async (req, res) => {
-    console.log("first")
+    console.log('User:', req.user)
     try {
         const currentUser = await User.findById(req.user.id);
         const userPosts = await Post.find({ userId: currentUser._id });
