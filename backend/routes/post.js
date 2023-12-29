@@ -1,19 +1,20 @@
-const { getPost,getuserPosts,createPost,
-    updatePost,deletePost,likePost,
-    dislikePost,getTimelinePosts,} = require("../controllers/postController")
-    const verifyToken = require('../middlewares/auth')
-const postRouter = require('express').Router()
-postRouter.get('/find/:id',getPost)
-postRouter.get('/find/userposts/:id',getuserPosts);
-postRouter.post('/createPost',verifyToken,createPost)
-postRouter.get('/timelinePosts',verifyToken, getTimelinePosts);
+// Import necessary modules
+const express = require('express');
+const postController = require('../controllers/postController');
+const verifyToken = require('../middlewares/auth');
 
+// Create a router instance
+const postRouter = express.Router();
 
+// Define routes
+postRouter.get('/find/:id', postController.getPost);
+postRouter.get('/find/userposts/:id', postController.getuserPosts);
+postRouter.post('/createPost', verifyToken, postController.createPost);
+postRouter.get('/timelinePosts', verifyToken, postController.getTimelinePosts);
+postRouter.put('/updatePost/:id', verifyToken, postController.updatePost);
+postRouter.put('/likePost/:postid', verifyToken, postController.likePost);
+postRouter.put('/dislikePost/:postid', verifyToken, postController.dislikePost);
+postRouter.delete('/deletePost/:id', verifyToken, postController.deletePost);
 
-
-postRouter.put('/updatePost/:id',verifyToken,updatePost)
-postRouter.put('/likePost/:postid',verifyToken,likePost)
-postRouter.put('/dislikePost/:postid',verifyToken,dislikePost)
-postRouter.delete('/deletePost/:id',verifyToken,deletePost)
-
-module.exports = postRouter
+// Export the router
+module.exports = postRouter;

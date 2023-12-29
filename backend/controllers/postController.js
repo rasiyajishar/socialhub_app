@@ -22,13 +22,13 @@ const getuserPosts = async(req,res)=>{
 
 const createPost = async(req,res)=>{
     try {
-     const isempty = Object.values(req.body).some((value) => !value)
+     const isempty = Object.values(req.body.body).some((value) => !value)
 
      if (isempty) {
         throw new Error("Fill all fields!");
     }
 
-    const post = await Post.create({ ...req.body, userId: req.user.id });
+    const post = await Post.create({ ...req.body.body, userId: req.user.id });
     console.log(post)
     return res.status(201).json(post)
 } catch (error) {

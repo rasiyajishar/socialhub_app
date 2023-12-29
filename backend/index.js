@@ -1,9 +1,9 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const dotenv = require("dotenv").config()
+
 const cors = require("cors")
 const app = express()
-
+const PORT = process.env.PORT || 3003;
 require('dotenv').config();
 
 // app.use(cors())
@@ -14,7 +14,8 @@ const corsOptions = {
   credentials: true,
   optionsSuccessStatus: 204,
 };
-app.use(cors(corsOptions));
+
+
 
 app.use(express.json());
 
@@ -52,7 +53,8 @@ app.use("/comment",commentRouter)
 app.use("/user",userRouter)
 app.use("/upload",uploadRouter)
 
-const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
+  console.log('mongodb connected');
+});;
